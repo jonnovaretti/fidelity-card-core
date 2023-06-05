@@ -75,3 +75,5 @@ gem 'tailwindcss-rails', '~> 2.0'
 gem 'devise', '~> 4.9'
 
 gem 'rspec', '~> 3.12'
+
+gem "shoulda-matchers", "~> 5.3"
