@@ -56,6 +56,10 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
 
   gem 'database_cleaner', '~> 2.0'
+
+  gem 'shoulda-matchers', '~> 5.3'
+
+  gem 'faker'
 end
 
 group :development do
@@ -69,11 +73,8 @@ group :development do
   # gem 'spring'
 end
 
-
 gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'devise', '~> 4.9'
 
 gem 'rspec', '~> 3.12'
-
-gem "shoulda-matchers", "~> 5.3"
