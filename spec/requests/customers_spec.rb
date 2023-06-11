@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe CustomersController, type: :request do
   let(:company) { create(:company) }
 
-  let(:valid_attributes) { customer(attributes_for(:customer, company: company)) }
-  let(:invalid_attributes) { customer(attributes_for(:customer, company: company).except(:name)) }
+  let(:valid_attributes) { attributes_for(:customer) }
+  let(:invalid_attributes) { attributes_for(:customer).except(:name) }
 
   before { login(company.user) }
 
   describe 'GET /index' do
     it 'renders a successful response' do
       create(:customer, company: company)
-      get company_customers
+      get company_customers_path(company_id: company.id)
       expect(response).to be_successful
     end
   end
@@ -19,14 +19,14 @@ RSpec.describe CustomersController, type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       customer = create(:customer)
-      get company_customer(company, customer)
+      get company_customer_path(company, customer)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_company_custoomer
+      get new_company_customer_path(company)
       expect(response).to be_successful
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe CustomersController, type: :request do
   describe 'GET /edit' do
     it 'renders a successful response' do
       customer = create(:customer)
-      get edit_company_customer(company, customer)
+      get edit_company_customer_path(company_id: company.id, id: customer.id)
       expect(response).to be_successful
     end
   end
@@ -43,26 +43,26 @@ RSpec.describe CustomersController, type: :request do
     context 'with valid parameters' do
       it 'creates a new Customer' do
         expect do
-          post company_customers, params: { customer: valid_attributes }
+          post company_customers_path(company), params: { customer: valid_attributes }
         end.to change(Customer, :count).by(1)
       end
 
       it 'redirects to the created customer' do
-        post company_customers, params: { customer: valid_attributes }
-        expect(response).to redirect_to(customer_url(Customer.last))
+        post company_customers_path(company), params: { customer: valid_attributes }
+        expect(response).to redirect_to(company_customer_url(company_id: company.id, id: Customer.last.id))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new Customer' do
         expect do
-          post company_customers, params: { customer: invalid_attributes }
+          post company_customers_path(company), params: { customer: invalid_attributes }
         end.to change(Customer, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post company_customers, params: { customer: invalid_attributes }
-        expect(response).to be_successful
+      it "renders an unprocessable response (i.e. to display the 'new' template)" do
+        post company_customers_path(company), params: { customer: invalid_attributes }
+        expect(response).to be_unprocessable
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe CustomersController, type: :request do
 
       it 'updates the requested customer' do
         customer = create(:customer)
-        patch company_customer_url(customer), params: { customer: new_attributes }
+        patch company_customer_url(company_id: company.id, id: customer), params: { customer: new_attributes }
         customer.reload
         expect(customer.name).to eq(new_attributes[:name])
         expect(customer.phone).to eq(new_attributes[:phone])
@@ -83,17 +83,17 @@ RSpec.describe CustomersController, type: :request do
 
       it 'redirects to the customer' do
         customer = create(:customer)
-        patch company_customer_url(customer), params: { customer: new_attributes }
+        patch company_customer_url(company_id: company.id, id: customer), params: { customer: new_attributes }
         customer.reload
-        expect(response).to redirect_to(company_customer_url(customer))
+        expect(response).to redirect_to(company_customer_url(company_id: company.id, id: customer))
       end
     end
 
     context 'with invalid parameters' do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable response (i.e. to display the 'edit' template)" do
         customer = create(:customer)
-        patch company_customer_url(customer), params: { customer: invalid_attributes }
-        expect(response).to be_successful
+        patch company_customer_url(company_id: company.id, id: customer), params: { customer: invalid_attributes }
+        expect(response).to redirect_to(company_customer_url(company_id: company.id, id: customer))
       end
     end
   end
@@ -102,14 +102,14 @@ RSpec.describe CustomersController, type: :request do
     it 'destroys the requested customer' do
       customer = create(:customer)
       expect do
-        delete company_customer_url(customer)
+        delete company_customer_url(company_id: company.id, id: customer)
       end.to change(Customer, :count).by(-1)
     end
 
     it 'redirects to the customers list' do
       customer = create(:customer)
-      delete company_customer_url(customer)
-      expect(response).to redirect_to(customers_url)
+      delete company_customer_url(company_id: company.id, id: customer)
+      expect(response).to redirect_to(company_customers_url(company))
     end
   end
 end

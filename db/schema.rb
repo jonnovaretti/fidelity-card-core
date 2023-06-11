@@ -25,12 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_134228) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
+    t.string "name", null: false
+    t.string "phone", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_customers_on_company_id"
+    t.index ["name", "phone", "company_id"], name: "index_customers_on_name_and_phone_and_company_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

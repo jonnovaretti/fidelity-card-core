@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
+  before_action :set_company
 
   def index
     @customers = Customer.all
@@ -14,14 +15,16 @@ class CustomersController < ApplicationController
   def edit; end
 
   def create
-    @customer = Customer.new(customer_params)
+    @customer = Customer.new(customer_params.merge(company_id: @company.id))
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to customer_url(@customer), notice: 'Customer was successfully created.' }
+        format.html do
+          redirect_to company_customer_url(company_id: @company.id, id: @customer.id),
+                      notice: 'Customer was successfully created.'
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -30,7 +33,10 @@ class CustomersController < ApplicationController
   def update
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to customer_url(@customer), notice: 'Customer was successfully updated.' }
+        format.html do
+          redirect_to company_customer_url(company_id: @company.id, id: @customer.id),
+                      notice: 'Customer was successfully updated.'
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -42,7 +48,7 @@ class CustomersController < ApplicationController
     @customer.destroy
 
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
+      format.html { redirect_to company_customers_url(@company), notice: 'Customer was successfully destroyed.' }
     end
   end
 
@@ -53,8 +59,12 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
+  def set_company
+    @company = Company.first { |company| company.id == params[:company_id] && company.user_id == current_user.id }
+  end
+
   # Only allow a list of trusted parameters through.
   def customer_params
-    params.require(:customer).permit(:name, :phone, :company_id)
+    params.require(:customer).permit(:name, :phone)
   end
 end
