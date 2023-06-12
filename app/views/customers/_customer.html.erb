@@ -9,11 +9,6 @@
     <%= customer.phone %>
   </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Company:</strong>
-    <%= customer.company_id %>
-  </p>
-
   <% if action_name != "show" %>
     <%= link_to "Show this customer", company_customer_path(company_id: @company.id, id: customer.id), 
                                       class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
