@@ -60,6 +60,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:name, :score, :expires_at)
+    params.require(:card).permit(:name, :score, :max_score, :expires_at)
   end
 end

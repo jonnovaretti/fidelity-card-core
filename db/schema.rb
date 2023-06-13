@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_12_093935) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_13_094319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_093935) do
     t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_score", default: 0, null: false
     t.index ["company_id"], name: "index_cards_on_company_id"
     t.index ["customer_id"], name: "index_cards_on_customer_id"
   end
