@@ -1,4 +1,4 @@
-class CompaniesController < ApplicationController
+class CompaniesController < AuthenticationController
   before_action :set_company, only: %i[show edit update destroy]
 
   def index

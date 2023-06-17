@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class CardsController < AuthenticationController
   before_action :set_company
   before_action :set_customer
   before_action :set_card, only: %i[show edit update destroy]

@@ -1,23 +1,55 @@
-<main class="container mx-auto mt-28 px-5 flex">
-  <div class="w-full">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
-    <% if Company.exists?(user: current_user) %>
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-4xl">Companies</h1>
-        <%= link_to 'New company', new_company_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-      </div>
-    <% else %>
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-4xl">No companies</h1>
-        <%= link_to 'New company', new_company_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-      </div>
-    <% end %>
-
-    <div id="companies" class="min-w-full">
-      <%= render @companies %>
+<div class="bg-white rounded-lg px-8 py-6">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+  <div class="mt-8 mb-3 flex flex-col md:flex-row items-start md:items-center md:justify-between">
+    <div class="flex items-center justify-center space-x-4">
+      <h4 class="text-xl font-semibold">Companies</h4>
+    </div>
+    <div class="mt-4 md:mt-0">
+      <%= link_to 'New company', new_company_path, class: "rounded-lg py-3 px-5 bg-blue-300 text-white font-medium h-10 w-32" %>
     </div>
   </div>
-</main>
+  <table class="w-full my-8 whitespace-nowrap">
+    <thead class="bg-blue-300 text-gray-100 font-bold">
+      <tr>
+        <td class="py-2 pl-2">
+          Name
+        </td>
+        <td class="py-2 pl-2">
+          Description
+        </td>
+        <td class="py-2 pl-2">
+          Status
+        </td>
+        <td class="py-2 pl-2">
+          Date
+        </td>
+        <td class="py-2 pl-2">
+          View Details
+        </td>
+      </tr>
+    </thead>
+    <tbody class="text-sm">
+      <% @companies.each do |company| %>
+        <tr class="bg-gray-100 hover:bg-primary hover:bg-opacity-20 transition duration-200">
+          <td class="py-3 pl-2 capitalize">
+            <%= company.name %>
+          </td>
+          <td class="py-3 pl-2">
+            <%= company.description %>
+          </td>
+          <td class="py-3 pl-2">
+            <span class="bg-green-500 px-1.5 py-0.5 rounded-lg text-gray-100">Active</span>
+          </td>
+          <td class="py-3 pl-2">
+            <%= company.created_at.strftime("%d/%m/%Y") %>
+          </td>
+          <td class="py-3 pl-2">
+            <a href="#" class="bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg">View Details</a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
