@@ -1,4 +1,4 @@
-class CustomersController < ApplicationController
+class CustomersController < AuthenticationController
   before_action :set_customer, only: %i[show edit update destroy]
   before_action :set_company
 
