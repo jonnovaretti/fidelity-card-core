@@ -46,7 +46,7 @@
             <%= company.created_at.strftime("%d/%m/%Y") %>
           </td>
           <td class="py-3 pl-2">
-            <a href="#" class="bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg">View Details</a>
+            <%= link_to 'View details', company_customers_path(company), class: 'bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg' %>
           </td>
         </tr>
       <% end %>

@@ -10,7 +10,6 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%# <main class="container mx-auto mt-28 px-5 flex"> %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div class="flex min-h-screen custom-scrollbar">
@@ -48,13 +47,10 @@
       <div class="lg:pl-64 w-full flex flex-col">
         <!-- start::Topbar -->
         <div class="flex flex-col">
-          <header class="flex justify-between items-center h-16 py-4 px-6 bg-white">
+          <header class="flex justify-between items-center h-16 py-4 px-6 bg-gray-300">
             <!-- start::Mobile menu button -->
             <div class="flex items-center">
-              <button 
-                                @click="menuOpen = true" 
-                                class="text-gray-500 hover:text-primary focus:outline-none lg:hidden transition duration-200"
-                            >
+              <button class="text-gray-500 hover:text-primary focus:outline-none lg:hidden transition duration-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
               </button>
             </div>
@@ -64,9 +60,7 @@
               <!-- start::Profile -->
               <div  x-data="{ linkActive: false }" class="relative">
                 <!-- start::Main link -->
-                <div @click="linkActive = !linkActive"
-                                    class="cursor-pointer"
-                                >
+                <div class="cursor-pointer">
                   logged as <%= current_user.email %>
                 </div>
                 <!-- end::Main link -->
@@ -80,6 +74,5 @@
         <%= yield %>
       </div>
     </div>
-    <%# </main> %>
   </body>
 </html>
