@@ -5,11 +5,8 @@
     <% end %>
 
     <% if @company %>
-      <%= render "form", company: @company %>
+      <%= render @company %>
       <%= link_to 'Edit this company', edit_company_path(@company), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      <div class="inline-block ml-2">
-        <%= button_to 'Destroy this company', company_path(@company), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-      </div>
     <% else %>
       <p class="my-5">No company found</p>
     <% end %>

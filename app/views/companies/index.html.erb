@@ -10,7 +10,7 @@
       <%= link_to 'New company', new_company_path, class: "rounded-lg py-3 px-5 bg-blue-950 hover:bg-blue-800 text-white font-medium h-10 w-32" %>
     </div>
   </div>
-  <table class="w-full my-8 whitespace-nowrap">
+  <table class="w-full my-8">
     <thead class="bg-blue-950 text-gray-100 font-bold">
       <tr>
         <td class="py-2 pl-2">
@@ -29,17 +29,16 @@
           Date
         </td>
         <td class="py-2 pl-2">
-          View Details
         </td>
       </tr>
     </thead>
     <tbody class="text-sm">
       <% @companies.each do |company| %>
-        <tr class="bg-gray-100 hover:bg-primary hover:bg-opacity-20 transition duration-200">
+        <tr class="bg-gray-100 border-t-2 hover:bg-primary hover:bg-opacity-20 transition duration-200">
           <td class="py-3 pl-2 capitalize">
            <label class="font-semibold"> <%= company.name %> </label>
           </td>
-          <td class="py-3 pl-2 w-20">
+          <td class="py-3 pl-2 w-1/2">
             <%= company.description %>
           </td>
           <td class="py-3 pl-2">
@@ -52,9 +51,12 @@
             <%= company.created_at.strftime("%d/%m/%Y") %>
           </td>
           <td class="py-3 pl-2">
-            <%= link_to 'View details', company_customers_path(company), class: 'bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg' %>
-            <br>
-            <%= link_to 'View details', company_customers_path(company), class: 'bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg' %>
+            <div class="mb-4">
+              <%= link_to 'See company', company_path(company), class: 'bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg' %>
+            </div>
+            <div>
+              <%= link_to 'See customers', company_customers_path(company), class: 'bg-gray-300 hover:bg-opacity-90 px-2 py-1 mr-2 text-gray-700 rounded-lg' %>
+            </div>
           </td>
         </tr>
       <% end %>
