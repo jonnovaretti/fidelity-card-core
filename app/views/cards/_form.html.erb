@@ -10,18 +10,34 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :score %>
-    <%= form.number_field :score, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+<div class="bg-white p-4 grid gap-8 rounded-lg shadow-xl py-8 mt-4">
+    <!-- start:: Horizontal Form Layout -->
+    <div>
+      <div class="mt-6">
+        <form>
+          <div class="flex items-center my-4">
+            <label class="w-50">Name</label>
+            <%= form.text_field :name, class: "flex-1 py-1 border-gray-300 ml-14 rounded focus:border-gray-300 focus:outline-none focus:ring-0" %>
+          </div>
+          <div class="flex items-center my-4">
+            <label class="w-50">Score</label>
+            <%= form.text_field :score, class: "flex-1 py-1 border-gray-300 ml-14 rounded focus:border-gray-300 focus:outline-none focus:ring-0" %>
+          </div>
+          <div class="flex items-center my-4">
+            <label class="w-50">Max Score</label>
+            <%= form.text_field :max_score, class: "flex-1 py-1 border-gray-300 ml-5 rounded focus:border-gray-300 focus:outline-none focus:ring-0" %>
+          </div>
+          <div class="flex items-center my-4">
+            <label class="w-50">Expires at</label>
+            <%= form.date_select :expires_at, {}, { class: "flex-1 py-1 border-gray-300 ml-6 rounded focus:border-gray-300 focus:outline-none focus:ring-0" } %>
+          </div>
+          <div class="flex gap-2 ml-24 mt-6">
+            <%= form.submit class: "rounded-lg bg-blue-950 hover:bg-blue-800 text-white font-medium h-15 w-40" %>
+            <%= link_to 'Back to cards', company_customer_cards_path(@company, @customer), class: "ml-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium" %>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- end::Horizontal Form Layout -->
   </div>
 <% end %>
