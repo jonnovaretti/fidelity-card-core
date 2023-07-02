@@ -1,14 +1,66 @@
 <div id="<%= dom_id customer %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= customer.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Phone:</strong>
-    <%= customer.phone %>
-  </p>
-
+  <div class="grid grid-rows-2 grid-flow-row bg-white p-4 grid gap-8 rounded-lg shadow-xl py-8 mt-4">
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <p class="my-5">
+          <strong class="block font-medium mb-1">Name</strong>
+          <%= customer.name %>
+        </p>
+        <p class="my-5">
+          <strong class="block font-medium mb-1">Phone</strong>
+          <%= customer.phone %>
+        </p>
+      </div>
+      <div class="text-right">
+        <p class="my-5">
+          <%= link_to company_customers_path(@company), class: "rounded-lg ml-2 inline-block font-medium" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          <% end %>
+          <%= link_to edit_company_customer_path(company_id: @company.id, id: customer.id), class: "rounded-lg ml-2 inline-block font-medium" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+            </svg>
+          <% end %>
+        </p>
+      </div>  
+    </div>
+    <div>
+      <div>
+        <p class="text-right">
+          <%= link_to new_company_customer_card_path(@company, customer), class: "rounded-lg ml-2 inline-block font-medium" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          <% end %>
+      </div>
+      <div class="grid grid-cols-3 gap-5">
+        <% if customer.cards.any? %>
+          <% customer.cards.each do |card| %>
+            <div class="h-[100px] w-[230px] flex items-center justify-between border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
+              <div>
+                <p class="uppercase text-lg text-blue-500 font-bold mb-2"><%= card.name %></p>
+                <p class="font-bold text-gray-800 text-xs">expires at</p>
+                <p class="font-bold text-gray-800 text-xs"><%= card.expires_at.strftime("%d/%m/%Y") %></p>
+              </div>
+              <div class="text-center">
+                <span class="text-2xl">
+                  <%= card.score %> / <%= card.max_score %>
+                </span>
+                <br>
+                <span class="text-xs">
+                  score
+                </span>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= 'No cards found' %>
+        <% end %>
+    </div>
+    </div>
+  </div>
   <% if action_name != "show" %>
     <%= link_to "Show this customer", company_customer_path(company_id: @company.id, id: customer.id), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this customer', edit_company_customer_path(company_id: @company.id, id: customer.id), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
