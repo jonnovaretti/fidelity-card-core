@@ -61,10 +61,6 @@ class CustomersController < AuthenticationController
 
   def set_company
     @company = Company.find { |company| company.id == params[:company_id].to_i && company.user_id == current_user.id }
-
-    p @company
-    p params
-    p current_user
   end
 
   # Only allow a list of trusted parameters through.

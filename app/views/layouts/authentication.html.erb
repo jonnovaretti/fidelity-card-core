@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="flex min-h-screen custom-scrollbar">
-      <aside data-controller="menu" class="fixed bg-blue-950 inset-y-0 left-0 w-64 custom-scrollbar">
+      <aside class="fixed bg-blue-950 inset-y-0 left-0 w-64 custom-scrollbar">
         <!-- start::Logo -->
         <div class="flex items-center justify-center bg-black bg-opacity-30 h-16">
           <h1 class="text-gray-100 text-lg font-bold uppercase tracking-widest">
@@ -30,7 +30,7 @@
             </span>
           </a>
           <!-- start::Menu link -->
-          <div data-action="click->menu#toggle" data-menu-target="menu" class="h-15">
+          <div data-controller="menu" data-action="click->menu#toggle" data-menu-target="menu" class="h-15">
             <div class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 bg-black bg-opacity-30 text-gray-100" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
