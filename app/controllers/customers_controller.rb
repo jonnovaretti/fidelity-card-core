@@ -3,7 +3,7 @@ class CustomersController < AuthenticationController
   before_action :set_company
 
   def index
-    @customers = Customer.all
+    @customers = Customer.where(company: @company)
   end
 
   def show; end
@@ -60,7 +60,7 @@ class CustomersController < AuthenticationController
   end
 
   def set_company
-    @company = Company.first { |company| company.id == params[:company_id] && company.user_id == current_user.id }
+    @company = Company.find { |company| company.id == params[:company_id].to_i && company.user_id == current_user.id }
   end
 
   # Only allow a list of trusted parameters through.
