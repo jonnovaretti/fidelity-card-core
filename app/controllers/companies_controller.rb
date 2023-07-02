@@ -47,7 +47,7 @@ class CompaniesController < AuthenticationController
   private
 
   def set_company
-    @company = Company.find_by(id: params[:id], user: current_user)
+    @company = current_user.companies.find(params[:id])
   end
 
   def company_params
