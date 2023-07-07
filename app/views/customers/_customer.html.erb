@@ -39,7 +39,8 @@
       <div class="grid grid-cols-3 gap-5">
         <% if customer.cards.any? %>
           <% customer.cards.each do |card| %>
-            <div class="h-[100px] w-[230px] items-center justify-between border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
+            
+            <div class="h-[100px] w-[230px] border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
               <div>
                 <p class="uppercase text-md text-blue-500 font-bold mb-2"><%= card.name %></p>
               </div>
@@ -49,16 +50,18 @@
                   <p class="font-bold text-gray-800 text-xs "><%= card.expires_at.strftime("%d/%m/%Y") %></p>
                 </div>
                 <div class="flex-auto text-center">
-                  <span class="text-xl font-medium">
-                    <%= card.score %> / <%= card.max_score %>
-                  </span>
-                  <br>
-                  <span class="text-xs">
-                    score
-                  </span>
+                  <div class="flex flex-col">
+                    <span class="text-xl font-medium">
+                      <%= card.score %> / <%= card.max_score %>
+                    </span>
+                    <span class="text-xs">
+                      score
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+
           <% end %>
         <% else %>
           <%= 'No cards found' %>
