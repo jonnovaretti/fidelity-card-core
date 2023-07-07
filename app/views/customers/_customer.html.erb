@@ -1,13 +1,13 @@
 <div id="<%= dom_id customer %>">
-  <div class="grid grid-rows-2 grid-flow-row bg-white p-4 grid gap-8 rounded-lg shadow-xl py-8 mt-4">
+  <div class="bg-white p-4 grid gap-8 rounded-lg shadow-xl py-8 mt-4">
     <div class="grid grid-cols-2 gap-2">
       <div>
         <p class="my-5">
-          <strong class="block font-medium mb-1">Name</strong>
+          <strong class="block mb-1 text-sm text-gray-400">customer</strong>
           <%= customer.name %>
         </p>
         <p class="my-5">
-          <strong class="block font-medium mb-1">Phone</strong>
+          <strong class="block text-sm text-gray-400">phone</strong>
           <%= customer.phone %>
         </p>
       </div>
@@ -27,7 +27,8 @@
       </div>  
     </div>
     <div>
-      <div>
+      <div class="text-center">
+        <h2 class="text-2xl font-medium">Cards</h2>
         <p class="text-right">
           <%= link_to new_company_customer_card_path(@company, customer), class: "rounded-lg ml-2 inline-block font-medium" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -38,27 +39,31 @@
       <div class="grid grid-cols-3 gap-5">
         <% if customer.cards.any? %>
           <% customer.cards.each do |card| %>
-            <div class="h-[100px] w-[230px] flex items-center justify-between border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
+            <div class="h-[100px] w-[230px] items-center justify-between border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
               <div>
-                <p class="uppercase text-lg text-blue-500 font-bold mb-2"><%= card.name %></p>
-                <p class="font-bold text-gray-800 text-xs">expires at</p>
-                <p class="font-bold text-gray-800 text-xs"><%= card.expires_at.strftime("%d/%m/%Y") %></p>
+                <p class="uppercase text-md text-blue-500 font-bold mb-2"><%= card.name %></p>
               </div>
-              <div class="text-center">
-                <span class="text-2xl">
-                  <%= card.score %> / <%= card.max_score %>
-                </span>
-                <br>
-                <span class="text-xs">
-                  score
-                </span>
+              <div class="flex">
+                <div class="flex-auto w-26 text-left pt-5">
+                  <p class="font-bold text-gray-800 text-xs ">expires at</p>
+                  <p class="font-bold text-gray-800 text-xs "><%= card.expires_at.strftime("%d/%m/%Y") %></p>
+                </div>
+                <div class="flex-auto text-center">
+                  <span class="text-xl font-medium">
+                    <%= card.score %> / <%= card.max_score %>
+                  </span>
+                  <br>
+                  <span class="text-xs">
+                    score
+                  </span>
+                </div>
               </div>
             </div>
           <% end %>
         <% else %>
           <%= 'No cards found' %>
         <% end %>
-    </div>
+      </div>
     </div>
   </div>
   <% if action_name != "show" %>

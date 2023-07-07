@@ -3,10 +3,6 @@ class CardsController < AuthenticationController
   before_action :set_customer
   before_action :set_card, only: %i[show edit update destroy]
 
-  def index
-    @cards = @customer.cards
-  end
-
   def show; end
 
   def new
@@ -20,7 +16,7 @@ class CardsController < AuthenticationController
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to company_customer_card_url(@company, @customer, @card), notice: 'Card was successfully created.' }
+        format.html { redirect_to company_customer_path(@company, @customer), notice: 'Card was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
