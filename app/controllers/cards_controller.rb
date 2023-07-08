@@ -26,7 +26,7 @@ class CardsController < AuthenticationController
   def update
     respond_to do |format|
       if @card.update(card_params)
-        format.html { redirect_to company_customer_card_url(@company, @customer, @card), notice: 'Card was successfully updated.' }
+        format.html { redirect_to company_customer_url(@company, @customer), notice: 'Card was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end

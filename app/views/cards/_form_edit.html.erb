@@ -1,0 +1,56 @@
+<%= form_with(model: [@company, @customer, card], class: "contents") do |form| %>
+  <% if card.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
+      <ul>
+        <% card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="bg-white p-4 grid gap-8 rounded-lg shadow-xl py-8 mt-4">
+    <div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Customer Name</label>
+        </div>
+        <label><%= @customer.name %></label>
+      </div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Customer Phone</label>
+        </div>
+        <label><%= @customer.phone %></label>
+      </div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Card Name</label>
+        </div>
+        <%= card.name %>
+      </div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Score</label>
+        </div>
+        <%= form.text_field :score, class: "w-20 py-1 border-gray-300 rounded focus:border-gray-300 focus:outline-none focus:ring-0" %>
+      </div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Max Score</label>
+        </div>
+        <%= card.max_score %>
+      </div>
+      <div class="flex mb-4">
+        <div class="flex-initial w-36">
+          <label>Expires at</label>
+        </div>
+        <%= card.expires_at.strftime("%d/%m/%Y") %>
+      </div>
+      <div class="flex gap-2 ml-24 mt-6">
+        <%= form.submit class: "rounded-lg bg-blue-950 hover:bg-blue-800 text-white font-medium h-15 w-40" %>
+        <%= link_to 'Cancel', company_customer_path(@company, @customer), class: "ml-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium" %>
+      </div>
+    </div>
+  </div>
+<% end %>

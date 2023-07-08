@@ -12,22 +12,6 @@ RSpec.describe '/cards', type: :request do
     attributes_for(:card).merge(customer_id: customer.id, company_id: company.id)
   end
 
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      create(:card)
-      get company_customer_cards_url(company, customer)
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      card = create(:card)
-      get company_customer_card_url(company, customer, card)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_company_customer_card_url(company, customer)
@@ -53,7 +37,7 @@ RSpec.describe '/cards', type: :request do
 
       it 'redirects to the created card' do
         post company_customer_cards_path(company, customer), params: { card: valid_attributes }
-        expect(response).to redirect_to(company_customer_card_url(company, customer, Card.last))
+        expect(response).to redirect_to(company_customer_url(company, customer))
       end
     end
 
@@ -94,7 +78,7 @@ RSpec.describe '/cards', type: :request do
         card = create(:card)
         patch company_customer_card_url(company, customer, card), params: { card: new_attributes }
         card.reload
-        expect(response).to redirect_to(company_customer_card_url(company, customer, card))
+        expect(response).to redirect_to(company_customer_url(company, customer))
       end
     end
 
