@@ -6,6 +6,6 @@ FactoryBot.define do
     score { 0 }
     max_score { 100 }
     status { 0 }
-    expires_at { nil }
+    expires_at { 30.days.from_now }
   end
 end
