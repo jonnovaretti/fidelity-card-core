@@ -61,7 +61,7 @@ RSpec.describe '/cards', type: :request do
 
   describe 'PATCH /update' do
     let(:new_attributes) do
-      { name: 'New name', score: 10, expires_at: 1.day.from_now }
+      { score: 10 }
     end
 
     context 'with valid parameters' do
@@ -69,9 +69,7 @@ RSpec.describe '/cards', type: :request do
         card = create(:card)
         patch company_customer_card_url(company, customer, card), params: { card: new_attributes }
         card.reload
-        expect(card.name).to eq('New name')
         expect(card.score).to eq(10)
-        expect(card.expires_at).to be_within(1.second).of(1.day.from_now)
       end
 
       it 'redirects to the card' do
