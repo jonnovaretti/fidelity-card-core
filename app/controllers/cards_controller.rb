@@ -34,10 +34,10 @@ class CardsController < AuthenticationController
   end
 
   def destroy
-    @card.destroy
+    @card.cancel
 
     respond_to do |format|
-      format.html { redirect_to company_customer_cards_url(@company, @customer), notice: 'Card was successfully destroyed.' }
+      format.html { redirect_to company_customer_url(@company, @customer), notice: 'Card was successfully destroyed.' }
     end
   end
 

@@ -15,4 +15,10 @@ class Card < ApplicationRecord
     status = new_score == max_score ? :completed : :active
     update(score: new_score, status: status)
   end
+
+  def cancel
+    return unless active?
+
+    update(status: :cancelled)
+  end
 end

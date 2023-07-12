@@ -35,7 +35,7 @@ RSpec.describe '/cards', type: :request do
         end.to change(Card, :count).by(1)
       end
 
-      it 'redirects to the created card' do
+      it 'redirects to the customer details' do
         post company_customer_cards_path(company, customer), params: { card: valid_attributes }
         expect(response).to redirect_to(company_customer_url(company, customer))
       end
@@ -72,7 +72,7 @@ RSpec.describe '/cards', type: :request do
         expect(card.score).to eq(10)
       end
 
-      it 'redirects to the card' do
+      it 'redirects to the customer details' do
         card = create(:card)
         patch company_customer_card_url(company, customer, card), params: { card: new_attributes }
         card.reload
@@ -94,17 +94,18 @@ RSpec.describe '/cards', type: :request do
   end
 
   describe 'DELETE /destroy' do
-    it 'destroys the requested card' do
-      card = create(:card)
+    it 'cancels the requested card' do
+      card = create(:card, status: 'active')
       expect do
         delete company_customer_card_url(company, customer, card)
-      end.to change(Card, :count).by(-1)
+        card.reload
+      end.to change(card, :status).from('active').to('cancelled')
     end
 
-    it 'redirects to the cards list' do
+    it 'redirects to the customer details' do
       card = create(:card)
-      delete company_customer_card_url(company, customer, card)
-      expect(response).to redirect_to(company_customer_cards_url(company, customer))
+      delete company_customer_url(company, customer, card)
+      expect(response).to redirect_to(company_customer_url(company, customer))
     end
   end
 end
