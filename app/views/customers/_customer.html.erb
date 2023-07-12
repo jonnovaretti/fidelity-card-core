@@ -39,15 +39,17 @@
         <div class="grid grid-cols-3 gap-5">
           <% if customer.cards.any? %>
             <% customer.cards.each do |card| %>
+              <% status_color = status_color(card.status) %>
               <%= link_to edit_company_customer_card_path(@company, customer, card) do %>
-                <div class="h-[100px] w-[230px] border border-gray-400 border-l-8 border-l-blue-500 shadow-xl rounded-lg px-4">
+                <div class="h-[100px] w-[230px] border border-gray-400 border-l-8 border-l-<%= status_color %>-500 shadow-xl rounded-lg px-4">
                   <div>
                     <p class="uppercase text-md text-blue-500 font-bold mb-2"><%= card.name %></p>
                   </div>
                   <div class="flex">
-                    <div class="flex-auto w-26 text-left pt-5">
-                      <p class="font-bold text-gray-800 text-xs ">expires at</p>
-                      <p class="font-bold text-gray-800 text-xs "><%= card.expires_at.strftime("%d/%m/%Y") %></p>
+                    <div class="flex-auto w-26 text-left">
+                      <p class="font-bold text-<%= status_color %>-500 text-xs uppercase"><%= card.status %></p>
+                      <p class="font-bold text-gray-500 text-xs ">expires at</p>
+                      <p class="font-bold text-gray-500 text-xs "><%= card.expires_at.strftime("%d/%m/%Y") %></p>
                     </div>
                     <div class="flex-auto text-center">
                       <div class="flex flex-col">

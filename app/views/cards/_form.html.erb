@@ -57,7 +57,8 @@
 
       <div class="flex gap-2 ml-24 mt-6">
         <%= form.submit class: "rounded-lg bg-blue-950 hover:bg-blue-800 text-white font-medium h-15 w-40" %>
-        <%= link_to 'Cancel', company_customer_path(@company, @customer), class: "ml-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium" %>
+        <%= link_to 'Back', company_customer_path(@company, @customer), class: "ml-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium" %>
+        <%= button_to "Cancel card", company_customer_card_path(@company, @customer, card), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
       </div>
     </div>
     <!-- end::Horizontal Form Layout -->
