@@ -24,7 +24,7 @@
             Status
           </td>
           <td class="py-2 pl-2 text-center">
-            Stamps
+            Cards
           </td>
           <td class="py-2 pl-2">
             Date
@@ -46,7 +46,7 @@
               <span class="bg-green-500 px-1.5 py-0.5 rounded-lg text-gray-100">Active</span>
             </td>
             <td class="py-3 pl-2 text-center">
-              <%= 8 %>
+              <%= customer.cards.size %>
             </td>
             <td class="py-3 pl-2">
               <%= customer.created_at.strftime("%d/%m/%Y") %>
